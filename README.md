@@ -1,4 +1,4 @@
-**# RBAC-logging-users-using-Passport-Node.js**
+**### RBAC-logging-users-using-Passport-Node.js**
 
 *## 📜 Description*
 A Node.js application implementing **Role-Based Access Control (RBAC)** using **Passport.js** for authentication. This project allows for user registration, login, and access management based on roles such as Admin, Employer, and Candidate.
@@ -24,6 +24,8 @@ A Node.js application implementing **Role-Based Access Control (RBAC)** using **
 
  **Clone the repository**:
    git clone https://github.com/your-username/RBAC-logging-users-using-Passport-Node.js.git
+
+   
    cd RBAC-logging-users-using-Passport-Node.js
 Install dependencies:
 
@@ -43,4 +45,6 @@ SESSION_SECRET=your_session_secret
 
 ▶️ Usage
 Run the application:
+
+
 npm start
