@@ -14,6 +14,8 @@ passport.use(
             if(!user){
                 return done(null, false, {message: 'username/email not registered'});
             }
+
+            const is
         } catch (error) {
             done(error);
         }
