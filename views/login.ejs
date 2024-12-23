@@ -6,14 +6,32 @@
     <label for="email">Email/Username</label>
     <input type="email" name="email" id="email" />
   </div>
-  <div>
+  <div style="position: relative;">
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" />
+    <input type="password" name="password" id="password" style="padding-right: 30px;" />
+    <span id="toggle-password" 
+          style="position: absolute; right: 5px; top: 70%; transform: translateY(-50%); cursor: pointer;">👁️</span>
   </div>
   <div>
     <input type="submit" value="Login" />
   </div>
 </form>
+
+<script>
+  const passwordField = document.getElementById('password');
+  const togglePassword = document.getElementById('toggle-password');
+
+  togglePassword.addEventListener('click', () => {
+  const isPassword = passwordField.type === 'password';
+  passwordField.type = isPassword ? 'text' : 'password';
+  
+  // Update icon and style
+  togglePassword.textContent = '👁️'; // Always use the same emoji
+  togglePassword.style.textDecoration = isPassword ? 'none' : 'line-through'; // Add or remove diagonal line
+});
+
+</script>
+
 
 <div>
   <p>

@@ -1,14 +1,22 @@
 const router = require('express').Router()
 const User = require('../models/user.model')
 const { body, validationResult } = require('express-validator')
+const passport = require('passport')
+const { ensureLoggedOut } = require('connect-ensure-login');
 
 router.get('/login', async(req, res, next)=>{
     res.render('Login')
 })
 
-router.post('/login', async(req, res, next)=>{
-    res.send('Login post')
-})
+router.post(
+    '/login',
+    // ensureLoggedOut({ redirectTo: '/' }),
+    passport.authenticate('local', {
+      successReturnToOrRedirect: '/user/profile',
+      failureRedirect: '/auth/login',
+      failureFlash: true,
+    })
+  );
 
 router.get('/register', async(req, res, next)=>{
     res.render('Register');
@@ -55,8 +63,14 @@ async(req, res, next)=>{
     }
 });
 
-router.get('/logout', async(req, res, next)=>{
-    res.send('Logout')
-})
+router.get('/logout', async (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err); // Pass the error to the next middleware
+        }
+        res.redirect('/'); // Redirect to the homepage after successful logout
+    });
+});
+
 
 module.exports = router;
