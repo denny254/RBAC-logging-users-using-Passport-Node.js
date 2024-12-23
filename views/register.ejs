@@ -13,18 +13,50 @@
       value="<%= locals.email ? email : '' %>"
     />
   </div>
-  <div>
+  <div style="position: relative;">
     <label for="password">Password</label>
     <input type="password" name="password" id="password" />
+    <span id="toggle-password-1" 
+          style="position: absolute; right: 5px; top: 70%; transform: translateY(-50%); cursor: pointer;">👁️</span>
   </div>
-  <div>
-    <label for="password2">Confirm password</label>
+  
+  <div style="position: relative;">
+    <label for="password2">Confirm Password</label>
     <input type="password" name="password2" id="password2" />
+    <span id="toggle-password-2" 
+          style="position: absolute; right: 5px; top: 70%; transform: translateY(-50%); cursor: pointer;">👁️</span>
   </div>
   <div>
     <input type="submit" value="Register" />
   </div>
 </form>
+
+<script>
+  const passwordField1 = document.getElementById('password');
+  const togglePassword1 = document.getElementById('toggle-password-1');
+
+  const passwordField2 = document.getElementById('password2');
+  const togglePassword2 = document.getElementById('toggle-password-2');
+
+  const toggleIcon = (toggleButton, isPassword) => {
+    toggleButton.textContent = isPassword ? '👁️' : '👁️';
+    toggleButton.style.textDecoration = isPassword ? 'none' : 'line-through'; // Add diagonal
+  };
+
+  togglePassword1.addEventListener('click', () => {
+    const isPassword = passwordField1.type === 'password';
+    passwordField1.type = isPassword ? 'text' : 'password';
+    toggleIcon(togglePassword1, isPassword);
+  });
+
+  togglePassword2.addEventListener('click', () => {
+    const isPassword = passwordField2.type === 'password';
+    passwordField2.type = isPassword ? 'text' : 'password';
+    toggleIcon(togglePassword2, isPassword);
+  });
+</script>
+
+
 <div>
   <p>
     Already have an account? <span><a href="/auth/login">Login</a></span>
