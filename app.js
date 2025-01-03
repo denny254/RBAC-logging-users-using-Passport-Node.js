@@ -7,6 +7,8 @@ const session = require("express-session");
 const passport = require("passport");
 const MongoStore = require("connect-mongo"); 
 const connectEnsureLogin = require("connect-ensure-login");
+const flash = require("connect-flash");
+
 
 // Initialization
 const app = express();
@@ -32,15 +34,24 @@ app.use(
   })
 );
 
+
+// Initialize connect-flash
+app.use(flash());
+
+// Middleware to pass flash messages to views
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  res.locals.user = req.user;
+  next();
+});
+
+
 // For Passport JS Authentication
 app.use(passport.initialize());
 app.use(passport.session());
 require('./utils/passport.auth');
 
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  next();
-});
+
 
 // Connect to MongoDB
 const ConnectDB = async () => {
